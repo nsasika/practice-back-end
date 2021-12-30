@@ -1,5 +1,7 @@
 import mongodb from "mongodb";
 
+import RestaurantsDAO from "../dao/restaurantsDAO.js";
+
 const connectDb = (app) => {
   const MongoClient = mongodb.MongoClient;
 
@@ -14,6 +16,7 @@ const connectDb = (app) => {
       process.exit(1);
     })
     .then(async (client) => {
+      RestaurantsDAO.injectDB(client);
       app.listen(port, () => {
         console.log(`listening on port ${port}`);
       });
