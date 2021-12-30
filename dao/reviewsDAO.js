@@ -20,6 +20,7 @@ export default class ReviewsDAO {
     try {
       const reviewDoc = {
         name: user.name,
+        user_id: user._id,
         date,
         text: review,
         restaurant_id: ObjectId(restaurantId),
@@ -27,6 +28,20 @@ export default class ReviewsDAO {
       return await reviews.insertOne(reviewDoc);
     } catch (e) {
       console.error(`Unable to post review: ${e}`);
+      return { error: e };
+    }
+  }
+
+  static async updateReview(reviewId, userId, text, date) {
+    try {
+      const updateResponse = await reviews.updateOne(
+        { user_id: userId, _id: ObjectId(reviewId) },
+        { $set: { text: text, date: date } }
+      );
+
+      return updateResponse;
+    } catch (e) {
+      console.error(`Unable to update review: ${e}`);
       return { error: e };
     }
   }
