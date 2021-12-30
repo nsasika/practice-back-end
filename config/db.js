@@ -1,6 +1,7 @@
 import mongodb from "mongodb";
 
 import RestaurantsDAO from "../dao/restaurantsDAO.js";
+import ReviewsDAO from "../dao/reviewsDAO.js";
 
 const connectDb = (app) => {
   const MongoClient = mongodb.MongoClient;
@@ -17,6 +18,7 @@ const connectDb = (app) => {
     })
     .then(async (client) => {
       RestaurantsDAO.injectDB(client);
+      ReviewsDAO.injectDB(client);
       app.listen(port, () => {
         console.log(`listening on port ${port}`);
       });
