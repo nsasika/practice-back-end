@@ -12,5 +12,6 @@ router
   .post(ReviewsCtrl.apiPostReview)
   .put(ReviewsCtrl.apiPutReview)
   .delete(ReviewsCtrl.apiDeleteReview);
+router.route("/cuisines").get(RestaurantsCtrl.apiGetRestaurantCuisines);
 
 export default router;
